@@ -11,18 +11,21 @@ import com.google.android.material.textfield.TextInputEditText
 class MainActivity : AppCompatActivity() {
 
     companion object {
-        const val COLOR_KEY = "COLOR_KEY"
-        const val ERROR_MESSAGE_KEY = "ERROR_MESSAGE"
+        private const val COLOR_KEY = "COLOR_KEY"
+        private const val ERROR_KEY = "ERROR_KEY"
     }
 
-    // Register activity result launcher
-    private val resultLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == RESULT_OK) {
-                val errorMessage = result.data?.getStringExtra(ERROR_MESSAGE_KEY)
-                if (errorMessage != null) {
-                    Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
-                }
+    // Activity result launcher
+    private val startForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
+            val data = activityResult.data
+            val error = data?.getBooleanExtra(ERROR_KEY, false)
+            if (error == true) {
+                Toast.makeText(
+                    this,
+                    getString(R.string.color_code_input_invalid),
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
 
@@ -36,27 +39,26 @@ class MainActivity : AppCompatActivity() {
         submitButton.setOnClickListener {
             val colorCode = inputField.text.toString()
 
-            if (colorCode.isEmpty()) {
+            if (colorCode.isNotEmpty()) {
+                if (colorCode.length < 6) {
+                    Toast.makeText(
+                        this,
+                        getString(R.string.color_code_input_wrong_length),
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    val resultIntent = Intent(this, ResultActivity::class.java)
+                    resultIntent.putExtra(COLOR_KEY, colorCode)
+                    // startActivity(resultIntent)  <-- old way
+                    startForResult.launch(resultIntent) // <-- new way
+                }
+            } else {
                 Toast.makeText(
                     this,
                     getString(R.string.color_code_input_empty),
                     Toast.LENGTH_LONG
                 ).show()
-                return@setOnClickListener
             }
-
-            if (colorCode.length < 6) {
-                Toast.makeText(
-                    this,
-                    getString(R.string.color_code_input_wrong_length),
-                    Toast.LENGTH_LONG
-                ).show()
-                return@setOnClickListener
-            }
-
-            val intent = Intent(this, ResultActivity::class.java)
-            intent.putExtra(COLOR_KEY, colorCode)
-            resultLauncher.launch(intent)
         }
     }
 }
