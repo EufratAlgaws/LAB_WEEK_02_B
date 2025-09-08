@@ -5,38 +5,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    style="@style/screen_margin">
+    android:padding="24dp"
+    tools:context=".MainActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent">
+        android:gravity="center"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Welcome Message -->
         <TextView
             android:id="@+id/welcome_message"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            style="@style/text_display"
-            android:text="@string/welcome_message" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome_message"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Input Field -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/color_code_input_wraper"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/text_input"
-            android:hint="@string/color_code_input_message">
+            android:hint="@string/color_code_input_message"
+            app:startIconDrawable="@android:drawable/ic_menu_edit"
+            android:layout_marginBottom="16dp">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/color_code_input_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:maxLength="6" />
+                android:inputType="textCapCharacters"
+                android:maxLength="6"/>
         </com.google.android.material.textfield.TextInputLayout>
-        <Button
+
+        <!-- Submit Button -->
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/submit_button"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/button"
-            android:text="@string/submit_button"/>
+            android:text="@string/submit_button"
+            android:textAllCaps="false"
+            app:cornerRadius="12dp"/>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

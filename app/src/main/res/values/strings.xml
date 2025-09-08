@@ -1,10 +1,20 @@
+<!-- app/src/main/res/values/strings.xml -->
 <resources>
-    <string name="app_name">Lab_Week_02_B</string>
-    <string name="welcome_message">Welcome! Enter a color code:</string>
-    <string name="color_code_input_message">Enter 6-digit HEX color code</string>
-    <string name="submit_button">Apply Color</string>
-    <string name="color_code_input_empty">Please enter a color code.</string>
-    <string name="color_code_input_wrong_length">Color code must be 6 characters long.</string>
-    <string name="color_code_input_invalid">Invalid color code entered.</string>
-    <string name="color_code_result_message">Color code #%1$s is applied!</string>
+    <!-- App name -->
+    <string name="app_name">LAB_WEEK_02_B</string>
+
+    <!-- MainActivity Strings -->
+    <string name="welcome_message">Welcome to the Color App!</string>
+    <string name="color_code_input_message">Enter color code (e.g., FF5733)</string>
+    <string name="submit_button">Submit</string>
+
+    <!-- Input Validation Error Messages -->
+    <string name="color_code_input_empty">Color code cannot be empty!</string>
+    <string name="color_code_input_wrong_length">Color code must be 6 characters long!</string>
+    <string name="color_code_input_invalid">Invalid color code entered!</string>
+
+    <!-- ResultActivity Strings -->
+    <string name="back_button">Back</string>
+    <string name="color_code_result_message">Your color code is #%1$s</string>
+    <string name="result_placeholder">Result will appear here</string>
 </resources>
